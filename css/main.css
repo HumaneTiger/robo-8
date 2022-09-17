@@ -1,0 +1,457 @@
+@font-face {
+    font-family: 'AlienFont';
+    src:  url('../font/Alien-Encounters-Regular.ttf') format('truetype');
+}
+html, body {
+	margin: 0;
+	padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-image: url(../img/background.png);
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Avenir Next', 'Avenir', 'Segoe UI', 'Lucida Grande', 'Helvetica Neue', 'Helvetica', 'Fira Sans', 'Roboto', 'Noto', 'Droid Sans', 'Cantarell', 'Oxygen', 'Ubuntu', 'Franklin Gothic Medium', 'Century Gothic', 'Liberation Sans', sans-serif, 'EmojiSymbols';
+    font-size: 36px;
+    line-height: 1em;
+    text-align: center;
+    letter-spacing: 0;
+}
+body * {
+    box-sizing: border-box;
+    user-select: none;
+}
+#viewport {
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    background-position: 50% 50vh;
+}
+#viewport-raster {
+    display: block;
+    height: 840px;
+    width: 1442px;
+    overflow: hidden;
+}
+
+#viewport.off #viewport-ui,
+#viewport.off #viewport-raster {
+    visibility: hidden;
+}
+#viewport.boot #viewport-raster {
+    opacity: 0;
+    animation: boot 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+@keyframes boot {
+    0% {
+        transform: scale(0.1);
+        opacity: 0.5;
+    }
+    10% {
+        transform: scale(0.85);
+        opacity: 0.2;
+    }
+    20% {
+        transform: scale(0.92);
+        opacity: 1;
+    }
+    30% {
+        transform: scale(0.88);
+        opacity: 0.2;
+    }
+    40% {
+        transform: scale(0.85);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(0.9);
+        opacity: 0.1;
+    }
+    60% {
+        transform: scale(0.82);
+        opacity: 0.5;
+    }
+    70% {
+        transform: scale(0.88);
+        opacity: 0.9;
+    }
+    80% {
+        transform: scale(0.9);
+        opacity: 0.2;
+    }
+    90% {
+        transform: scale(0.95);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+main {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    z-index: 1;
+}
+main .wrapper {
+    z-index: 5;
+    position: relative;
+    padding: 50px;
+}
+main .raster {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../img/raster.png);
+    background-repeat: repeat;
+    z-index: 6;
+}
+main .monitor {
+    pointer-events: none;
+    position: absolute;
+    transform: scale(1.34) translate(0.3%, 1.7%);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(../img/monitor-frame.png);
+    background-size: 100% 96%;
+    background-repeat: no-repeat;
+    z-index: 8;
+}
+main .docker {
+    position: absolute;
+    width: 459px;
+    height: 77px;
+    transform: scale(0.85) translate(-50%, 75px);
+    left: 48%;
+    bottom: 0;
+    background-image: url(../img/docker.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: 15;
+}
+main .cartridge-target {
+    position: absolute;
+    width: 350px;
+    height: 200px;
+    transform: translate(-50%, 75px);
+    left: 50%;
+    top: 95%;
+    z-index: 1;
+}
+main .dirt {
+    pointer-events: none;
+    position: absolute;
+    transform: scale(1.42) translate(0.3%, -0.1%);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 7;
+}
+main .switch {
+    position: absolute;
+    left: -35%;
+    top: 20%;
+    width: 500px;
+    height: 500px;
+    background-image: url(../img/turn-base.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+main .switch .knob {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    transform-origin: 76px 105px;
+    width: 151px;
+    height: 186px;
+    background-image: url(../img/turn-knob.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    transition: transform 0.1s ease-in;
+}
+main .switch .light {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.1s ease-in;
+}
+main .switch .light-amber {
+    left: 21%;
+    top: 29%;
+    background-image: url(../img/light-amber.png);
+}
+main .switch .light-green {
+    left: 44%;
+    top: 17%;
+    background-image: url(../img/light-green.png);
+}
+main .switch .light-white {
+    left: 67%;
+    top: 29%;
+    background-image: url(../img/light-white.png);
+}
+main .switch.amber .knob {
+    transform: translate(-50%, -50%) rotate(-50deg);
+}
+main .switch.amber .light-amber {
+    opacity: 1;
+}
+main .switch.green .knob {
+    transform: translate(-50%, -50%) rotate(0deg);
+}
+main .switch.green .light-green {
+    opacity: 1;
+}
+main .switch.white .knob {
+    transform: translate(-50%, -50%) rotate(50deg);
+}
+main .switch.white .light-white {
+    opacity: 1;
+}
+main .pause {
+    position: absolute;
+    right: -22%;
+    top: 37%;
+    width: 170px;
+    height: 210px;
+    background-image: url(../img/pause-base.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+main .pause .pausebutton {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 170px;
+    height: 210px;
+    background-image: url(../img/pause-active.png);
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+main .pause.active .pausebutton {
+    display: block;
+}
+table {
+    border-collapse: collapse;
+}
+table td {
+    /*border: 1px rgba(195, 198, 209, 0.2) dashed;*/
+    width: 30px;
+    padding: 0;
+}
+table thead td span {
+  padding: 4px 0;
+}
+table td.separate span:first-child {
+    width: 10px;
+    margin-right: 10px;
+}
+table td.separate span:last-child {
+    width: 10px;
+}
+table td span {
+    float: left;
+    width: 30px;
+}
+
+table td span.enemy-collision {
+    position: relative;
+}
+table td span.enemy-collision:before {
+    content: '';
+    position: absolute;
+    opacity: 0.5;
+    left: -1px;
+    top: -5px;
+    width: 40px;
+    height: 40px;
+    transform: scale(1) translate(-50%, -50%);
+    animation: explode 1s ease-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scale(2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.5;
+    }
+    25% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    75% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+body.green-theme .wrapper {
+    background-color: #3a3f38;
+    background-image: radial-gradient(rgba(119, 254, 12, 0.3) 0%, transparent 50%);
+    color: #77fe0c;
+}
+
+body.green-theme main .dirt {
+    background-image: url(../img/dirt-green.png);
+}
+
+body.green-theme table thead td span {
+    background-color: rgba(119, 254, 12, 0.1);
+}
+
+body.green-theme table td span {
+    text-shadow: 0 0 3px #77fe0c;
+}
+
+body.green-theme table td span.enemy-collision:before {
+    background: radial-gradient(#77fe0c 0%, #77fe0c 30%, transparent 50%, #77fe0c 55%, transparent 60%);
+}
+
+
+body.amber-theme .wrapper {
+    background-color: #160808;
+    background-image: radial-gradient(rgba(238, 99, 26, 0.4) 0%, transparent 50%);
+    color: #fdb21c;
+}
+
+body.amber-theme main .dirt {
+    background-image: url(../img/dirt-amber.png);
+}
+
+body.amber-theme main .raster {
+    opacity: 0.5;
+}
+
+body.amber-theme table thead td span {
+    background-color: rgba(238, 99, 26, 0.1);
+}
+
+body.amber-theme table td span {
+    text-shadow: 0 0 3px #d95c24;
+}
+
+body.amber-theme table td span.enemy-collision:before {
+    background: radial-gradient(#ffc938 0%, #ffc938 30%, transparent 50%, #ffc938 55%, transparent 60%);
+}
+
+body.bw-theme .wrapper {
+    background-color: #fff;
+    background-image: radial-gradient(rgba(0, 0, 0, 0.2) 0%, transparent 50%);
+}
+
+body.bw-theme main .dirt {
+    background-image: url(../img/dirt-white.png);
+}
+
+body.bw-theme main .raster {
+    opacity: 0.3;
+}
+
+body.bw-theme table thead td span {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.bw-theme table td span {
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+body.bw-theme table td span.enemy-collision:before {
+    background: radial-gradient(#666 0%, #999 30%, transparent 50%, #999 55%, transparent 60%);
+}
+
+.cartridge {
+    width: 350px;
+    height: 304px;
+    position: absolute;
+    transition: transform 0.2s ease-out;
+}
+
+.cartridge:after {
+    font-family: 'AlienFont';
+    content: attr(data-game-config-name);
+    color: #3be9fa;
+    font-size: 38px;
+    text-transform: uppercase;
+    opacity: 0.9;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%);
+}
+
+.cartridge.no-1 {
+    left: -35%;
+    top: 90%;
+}
+
+.cartridge.no-2 {
+    right: -35%;
+    top: 80%;
+}
+
+.cartridge * {
+    pointer-events: none;
+}
+
+.cartridge img {
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.5));
+    transition: filter 0.2s ease-out;
+}
+
+.cartridge.grabbed {
+    transform: scale(1.05);
+}
+
+.cartridge.docked {
+    transform: translateY(-20%) scale(1.04);
+}
+
+.cartridge.docked .cartridge-active {
+    opacity: 0.9;
+}
+
+.cartridge.grabbed img {
+    filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.6));
+}
+
+.cartridge .cartridge-active {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}

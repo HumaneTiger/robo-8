@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="EN">
+
+  <head>
+      <meta charset="utf-8">
+      <title>Game Title</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/png" href="favicon.png">
+      <link rel="stylesheet" href="css/main.css">
+  </head>
+
+  <!-- 
+    CREDITS:
+  -->
+
+  <body class="amber-theme">
+    <main id="viewport" class="off">
+      <div class="wrapper">
+        <table>
+          <thead id="viewport-ui">
+            <tr>
+              <td><span>H</span></td>
+              <td><span>P</span></td>
+              <td><span>:</span></td>
+              <td class="health-1"><span>🛦</span></td>
+              <td class="health-2"><span>🛦</span></td>
+              <td class="health-3"><span>🛦</span></td>
+              <td class="health-4"><span>&#160;</span></td>
+              <td class="health-5"><span>&#160;</span></td>
+              <td class="health-6"><span>&#160;</span>
+              </td><td><span>&#160;</span></td>
+              <td class="separate">
+                  <span>&#160;</span>  
+                  <span>&#160;</span>
+              </td>
+              <td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td>
+              <td><span>&#160;</span></td><td><span>&#160;</span></td>
+              <td><span>S</span></td><td><span>C</span></td><td><span>O</span></td><td><span>R</span></td><td><span>E</span></td><td><span>:</span></td>
+              <td class="score-1"><span>0</span></td>
+              <td class="score-2"><span>0</span></td>
+              <td class="score-3"><span>0</span></td>
+              <td class="score-4"><span>0</span></td>
+              <td class="score-5"><span>0</span></td>
+              <td><span>&#160;</span></td><td><span>&#160;</span></td>
+              <td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td><td><span>&#160;</span></td>
+              <td><span>&#160;</span></td>
+              <td class="separate">
+                <span>&#160;</span>  
+                <span>&#160;</span>
+              </td>
+              <td><span>&#160;</span></td>
+              <td><span>T</span></td>
+              <td><span>I</span></td>
+              <td><span>M</span></td>
+              <td><span>E</span></td>
+              <td><span>:</span></td>
+              <td class="time-1"><span>0</span></td>
+              <td class="time-2"><span>0</span></td>
+              <td class="time-3"><span>0</span></td>
+              <td class="time-4"><span>0</span></td>
+            </tr>
+          </thead>
+        </table>
+        <table id="viewport-raster">
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="raster"></div>
+      <div class="dirt"></div>
+      <div class="monitor"></div>
+      <div class="docker"></div>
+      <div class="cartridge-target" id="cartridge-target"></div>
+      <div class="switch amber">
+        <div class="knob"></div>
+        <div class="light light-amber"></div>
+        <div class="light light-green"></div>
+        <div class="light light-white"></div>
+      </div>
+      <div class="pause inactive">
+        <div class="pausebutton"></div>
+      </div>
+      <div class="cartridge no-1" data-game-config-name="Space Invaders">
+        <img src="img/cartridge-inactive.png" width="100%" height="auto">
+        <div class="cartridge-active">
+          <img src="img/active-indicator.png" width="100%" height="auto">
+        </div>
+      </div>
+      <div class="cartridge no-2" data-game-config-name="Striker">
+        <img src="img/cartridge-inactive.png" width="100%" height="auto">
+        <div class="cartridge-active">
+          <img src="img/active-indicator.png" width="100%" height="auto">
+        </div>
+      </div>
+    </main>  
+    <div id="all-audio">
+      <!-- SFX -->
+      <audio class="sfx-knob-click" src="sound/fx/knob-click.mp3" preload></audio>
+      <audio class="sfx-turn-on" src="sound/fx/turn-on.mp3" preload></audio>
+      <audio class="sfx-click" src="sound/fx/click.mp3" preload></audio>
+      <audio class="sfx-explosion" src="sound/fx/explosion.mp3" preload></audio>
+      <audio class="sfx-laser-shoot" src="sound/fx/laser-shoot.mp3" preload></audio>
+      <audio class="sfx-lose" src="sound/fx/lose.wav" preload></audio>
+      <audio class="sfx-win" src="sound/fx/win.wav" preload></audio>
+      <audio class="sfx-player-damage" src="sound/fx/player-damage.wav" preload></audio>
+      <audio class="sfx-player-damage-2" src="sound/fx/player-damage-2.wav" preload></audio>
+    </div>
+    <script src="js/init.js" type="module"></script>
+    <script src="js/config-space-invaders.js" type="module"></script>
+    <script src="js/config-striker.js" type="module"></script>
+  </body>
+
+</html>
