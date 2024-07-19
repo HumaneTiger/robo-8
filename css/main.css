@@ -38,10 +38,14 @@ body * {
 #viewport.off #viewport-raster {
     visibility: hidden;
 }
-#viewport.boot #viewport-raster {
+#viewport.boot #viewport-raster,
+#viewport.powerdown #viewport-raster {
     opacity: 0;
     animation: boot 0.5s ease-in;
     animation-fill-mode: forwards;
+}
+#viewport.powerdown #viewport-raster {
+  animation-direction: reverse;
 }
 @keyframes boot {
     0% {
@@ -89,6 +93,8 @@ body * {
         opacity: 1;
     }
 }
+
+
 main {
     position: fixed;
     top: 40%;

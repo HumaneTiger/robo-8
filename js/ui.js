@@ -7,6 +7,8 @@ let newPosX = 0, newPosY = 0, startPosX = 0, startPosY = 0, initialStyleLeft = 0
 let dragMode = false;
 let dragEl = null;
 
+let autoScrollXInterval, autoScrollYInterval;
+
 let viewportRaster = document.querySelector("#viewport-raster tbody");
 
 let header;
@@ -18,15 +20,8 @@ let projectiles;
 let player;
 let additionalStyles;
 
-export let viewportScrollCounter = {
-  x: 0,
-  y: 0
-};
-
-export let viewportDimensions = {
-  x: 48,
-  y: 23
-};
+export let viewportScrollCounter;
+export let viewportDimensions;
 
 let viewport;
 export let newViewport;
@@ -68,6 +63,7 @@ export default {
   bootUpConsole(gameConfigName) {
 
     Config.load(gameConfigName);
+
     Logic.reloadConfig();
     Move.reloadConfig();
 
@@ -80,7 +76,10 @@ export default {
       viewport[i] = new Array(dimensions.x);
       newViewport[i] = new Array(dimensions.x);
     }
+
+    this.updateMetrics();
     
+    this.primeViewport();
     this.buildViewport();
     this.recalcViewport();
     this.repaintViewport();
@@ -97,7 +96,7 @@ export default {
   finishBootUpConsole() {
     window.paused = false;
     if (header.autoscroll && header.autoscroll === "scroll-x") {
-      window.setInterval(() => {
+      autoScrollXInterval = window.setInterval(() => {
         if (!this.isPaused()) {
           viewportScrollCounter.x += 1;
           player.x += 1;
@@ -108,7 +107,7 @@ export default {
         }
       }, 300);
     } else if (header.autoscroll && header.autoscroll === "scroll-y") {
-      window.setInterval(() => {
+      autoScrollYInterval = window.setInterval(() => {
         if (!this.isPaused()) {
           viewportScrollCounter.y += 1;
           player.y += 1;
@@ -119,6 +118,21 @@ export default {
         }
       }, 300);
     }
+  },
+
+  powerDownConsole() {
+
+    document.getElementById('viewport').classList.remove('boot');
+    Config.resetMetrics();
+
+    window.setTimeout(function() {
+      document.getElementById('viewport').classList.add('powerdown');
+    }.bind(this), 0);
+
+    window.setTimeout(function() {
+      document.getElementById('viewport').classList.remove('powerdown');
+      document.getElementById('viewport').classList.add('off');
+    }.bind(this), 600);
   },
 
   setNewViewport(viewport) {
@@ -216,12 +230,19 @@ export default {
 
       // set the element's new position:
       if (dragEl) {
+
+        if (!this.isPaused()) {
+          this.pause(true);
+          dragEl.classList.remove('docked');
+          this.powerDownConsole();
+        }
+
         if (this.checkForDragTarget(e)) {
           dragEl.style.top = (document.getElementById("cartridge-target").offsetTop + document.getElementById("cartridge-target").offsetHeight / 2 ) + "px";
           dragEl.style.left = (document.getElementById("cartridge-target").offsetLeft - document.getElementById("cartridge-target").offsetWidth / 2) + "px";  
         } else {
           dragEl.style.top = (dragEl.offsetTop - newPosY) + "px";
-          dragEl.style.left = (dragEl.offsetLeft - newPosX) + "px";  
+          dragEl.style.left = (dragEl.offsetLeft - newPosX) + "px";
         }
       }
 
@@ -279,11 +300,34 @@ export default {
 
   resetDraggedElement(el) {
     el.classList.remove('grabbed');
+    el.classList.remove('docked');
+  },
+
+  primeViewport() {
+
+    clearInterval(autoScrollXInterval);
+    clearInterval(autoScrollYInterval);
+
+    Config.removePlayerProjectiles();
+    Config.removeEnemyProjectiles();
+
+    viewportRaster.innerHTML = "";
+    viewportRaster.removeAttribute('style');
+
+    viewportScrollCounter = {
+      x: 0,
+      y: 0
+    };
+
+    viewportDimensions = {
+      x: 48,
+      y: 23
+    };
+
   },
 
   buildViewport() {
     let viewportRasterMarkup = "";
-    viewportRaster.innerHTML = "";
 
     for (var y = 0; y < dimensions.y; y += 1) {
 

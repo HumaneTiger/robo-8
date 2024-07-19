@@ -1,6 +1,6 @@
 import Config from "./config.js";
 
-Config.register({
+const config = {
 
   header: {
     name: "Striker",
@@ -405,5 +405,10 @@ Config.register({
       limitation: 5
     }]
   }
+};
 
-});
+export default {
+  register() {
+    Config.register(config);
+  }
+}

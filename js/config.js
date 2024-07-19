@@ -1,3 +1,6 @@
+import configSpaceInvaders from './config-space-invaders.js'
+import configStriker from './config-striker.js'
+
 let highscore = 0;
 
 let projectileObjects = {
@@ -11,11 +14,16 @@ let loadedConfigName;
 export default {
 
   register(gameConfig) {
-    registeredGameConfigs[gameConfig.header.name] = gameConfig;
+    registeredGameConfigs[gameConfig.header.name] = JSON.parse(JSON.stringify(gameConfig));
   },
 
   load(gameConfigName) {
     loadedConfigName = gameConfigName;
+    if (gameConfigName === 'Space Invaders') {
+      configSpaceInvaders.register();
+    } else if (gameConfigName === 'Striker') {
+      configStriker.register();
+    }
   },
 
   getDimensions() {
@@ -49,8 +57,16 @@ export default {
     projectileObjects.player.push(projectile);
   },
 
+  removePlayerProjectiles() {
+    projectileObjects.player = [];
+  },
+
   addEnemyProjectile(projectile) {
     projectileObjects.enemy.push(projectile);
+  },
+
+  removeEnemyProjectiles() {
+    projectileObjects.enemy = [];
   },
 
   getAdditionalStyles() {
@@ -63,6 +79,11 @@ export default {
 
   getHighscore() {
     return highscore;
+  },
+
+  resetMetrics() {
+    highscore = 0;
+    window.currentMilliSec = 0;
   },
 
   getProjectileConfig() {

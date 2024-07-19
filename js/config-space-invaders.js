@@ -1,6 +1,6 @@
 import Config from "./config.js";
 
-Config.register({
+const config = {
 
   header: {
     name: "Space Invaders",
@@ -115,7 +115,7 @@ Config.register({
     }]
   }
 
-});
+};
 
 function createEnemyObjects() {
 
@@ -182,3 +182,10 @@ function createEnemyObjects() {
   return enemyObjects;
 
 }
+
+export default {
+  register() {
+    Config.register(config);
+  }
+}
+
