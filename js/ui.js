@@ -94,7 +94,7 @@ export default {
   },
 
   finishBootUpConsole() {
-    window.paused = false;
+    this.pause(false);
     if (header.autoscroll && header.autoscroll === "scroll-x") {
       autoScrollXInterval = window.setInterval(() => {
         if (!this.isPaused()) {
@@ -121,6 +121,9 @@ export default {
   },
 
   powerDownConsole() {
+
+    window.win = false;
+    window.loose = false;
 
     document.getElementById('viewport').classList.remove('boot');
     Config.resetMetrics();
@@ -231,7 +234,7 @@ export default {
       // set the element's new position:
       if (dragEl) {
 
-        if (!this.isPaused()) {
+        if (!this.isPaused() || window.win || window.loose) {
           this.pause(true);
           dragEl.classList.remove('docked');
           this.powerDownConsole();
@@ -245,10 +248,7 @@ export default {
           dragEl.style.left = (dragEl.offsetLeft - newPosX) + "px";
         }
       }
-
-
     }
-  
   },
 
   mouseUp(e) {

@@ -51,11 +51,21 @@ export default {
   },
 
   reloadConfig() {
+
     player = Config.getPlayer();
     enemies = Config.getEnemies();
     projectileConfig = Config.getProjectileConfig();
 
+    command = {
+      right: false,
+      left: false,
+      top: false,
+      bottom: false,
+      shoot: false
+    };
+
     clearInterval(watchKeysInterval);
+
     watchKeysInterval = window.setInterval(() => {
       this.watchKeys();
     }, 100 / (player.velocity));

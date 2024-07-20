@@ -3,13 +3,16 @@ import Ui from './ui.js'
 import Move from './move.js'
 
 let tickInterval = 50;
+
 window.currentMilliSec = 0;
+window.win = false;
+window.loose = false;
 
 window.onload = function() { init(); };
 
 function init() {
-  
-    window.paused = true;
+
+    Ui.pause(true);
 
     Logic.init();
     Ui.init();

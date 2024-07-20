@@ -277,9 +277,11 @@ export default {
 
     if (win) {
       Audio.sfx('win', 500);
+      window.win = true;
       Ui.pause(true);
     } else if (lose) {
       Audio.sfx('lose', 500);
+      window.loose = true;
       Ui.pause(true);
     }
   }
