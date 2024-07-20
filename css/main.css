@@ -26,6 +26,7 @@ body * {
     background-repeat: no-repeat;
     background-size: 200% 100%;
     background-position: 50% 50vh;
+    transform: scale(0) translate(-200vw, -200vh); /* will be calculated */
 }
 #viewport-raster {
     display: block;
