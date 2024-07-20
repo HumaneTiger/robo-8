@@ -9,7 +9,7 @@ html, body {
     height: 100%;
 }
 body {
-    background-image: url(../img/background.png);
+    background-image: url(../img/background.jpg);
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
     font-family: monospace, system-ui, -apple-system, BlinkMacSystemFont, 'Avenir Next', 'Avenir', 'Segoe UI', 'Lucida Grande', 'Helvetica Neue', 'Helvetica', 'Fira Sans', 'Roboto', 'Noto', 'Droid Sans', 'Cantarell', 'Oxygen', 'Ubuntu', 'Franklin Gothic Medium', 'Century Gothic', 'Liberation Sans', sans-serif, 'EmojiSymbols';
