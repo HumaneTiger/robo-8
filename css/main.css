@@ -430,6 +430,10 @@ body.bw-theme table td span.enemy-collision:before {
     top: 80%;
 }
 
+.cartridge.no-3 {
+    top: 1093px; left: 148px;
+}
+
 .cartridge * {
     pointer-events: none;
 }

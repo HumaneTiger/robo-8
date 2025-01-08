@@ -1,5 +1,6 @@
 import configSpaceInvaders from './config-space-invaders.js'
 import configStriker from './config-striker.js'
+import config2DGameJammers from './config-2d-game-jammers.js'
 
 let highscore = 0;
 
@@ -23,6 +24,8 @@ export default {
       configSpaceInvaders.register();
     } else if (gameConfigName === 'Striker') {
       configStriker.register();
+    } else if (gameConfigName === '2D Game Jammers') {
+      config2DGameJammers.register();
     }
   },
 
